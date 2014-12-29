@@ -54,7 +54,7 @@ public class TestMongoExport {
 
         DBObject timeQuery = new BasicDBObject();
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2014, 11, 1, 0, 0, 0);
+        calendar.set(2014, 11, 16, 0, 0, 0);
         timeQuery.put("$gte", new Date(calendar.getTimeInMillis()));
         calendar.set(2014, 11, 30, 0, 0, 0);
         timeQuery.put("$lt", new Date(calendar.getTimeInMillis()));
