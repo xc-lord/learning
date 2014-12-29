@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.lord</groupId>
+	<artifactId>xc-learn</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>xc-learn</name>
+	<url>http://maven.apache.org</url>
+
+	<!-- 子模块 -->
+	<modules>
+		<module>learn-jdk</module>
+		<module>learn-mongo</module>
+	</modules>
+
+	<!-- 公共属性与第三方开源项目的版本号 -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit-version>4.11</junit-version>
+	</properties>
+
+	<!-- 管理依赖版本号，子项目不显式引用版本号，则引用此位置的版本号 -->
+	<dependencyManagement>
+		<dependencies>
+			<!-- junit start -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit-version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- junit end -->
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>mongo-java-driver</artifactId>
+				<version>2.12.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.directory.studio</groupId>
+				<artifactId>org.apache.commons.io</artifactId>
+				<version>2.4</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- 公共依赖 -->
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+	</dependencies>
+
+	<!-- 开发者信息 -->
+	<developers>
+		<developer>
+			<name>xiaocheng</name>
+			<id>miraclelord</id>
+			<email>miraclelord@163.com</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+
+</project>
