@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+
+    <diskStore path="java.io.tmpdir"/>
+
+    <!--
+    配置自定义缓存
+    maxElementsInMemory：缓存中允许创建的最大对象数
+    maxBytesLocalHeap：指定占用内存大小，如果设置了这个属性，则maxElementsInMemory不需要配置
+    eternal：缓存中对象是否为永久的，如果是，超时设置将被忽略，对象从不过期。
+    timeToIdleSeconds：失效前的空闲秒数，即两次访问时间的最大时间间隔值，当eternal为false时，这个属性才有效，0为不限制。
+    timeToLiveSeconds：失效前的存活秒数，创建时间到失效时间的间隔为存活时间，当eternal为false时，这个属性才有效，0为不限制
+    overflowToDisk：内存不足时，是否启用磁盘缓存。
+    memoryStoreEvictionPolicy：缓存满了之后的淘汰算法。可选策略有：LRU（最近最少使用，默认策略）、FIFO（先进先出）、LFU（最少访问次数）
+    -->
+    <defaultCache
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="300"
+            timeToLiveSeconds="600"
+            overflowToDisk="false"/>
+
+    <cache name="pidShardingInfoCache"
+           maxBytesLocalHeap="100m"
+           eternal="false"
+           overflowToDisk="false"
+           timeToIdleSeconds="600"
+           timeToLiveSeconds="1800"
+           memoryStoreEvictionPolicy="LFU"/>
+
+</ehcache>

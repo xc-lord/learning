@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+          http://www.springframework.org/schema/aop
+          http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 启用注解 -->
+	<context:component-scan base-package="com.lord" />
+
+	<bean id="propertyConfigurer"
+		  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true"/>
+		<property name="location" value="classpath:global-config.properties"/>
+	</bean>
+
+	<mongo:mongo id="appraiseMongoDB" replica-set="${gome.appraise.mongo.urls}">
+		<mongo:options connections-per-host="${gome.appraise.mongo.conns}"
+			threads-allowed-to-block-for-connection-multiplier="5"
+			connect-timeout="3000" max-wait-time="6000" auto-connect-retry="true"
+			socket-keep-alive="true" socket-timeout="1500" slave-ok="true"
+			write-number="1" write-timeout="6000" write-fsync="false" />
+	</mongo:mongo>
+	<bean id="appraiseMongoUser" class="org.springframework.data.authentication.UserCredentials">
+		<constructor-arg name="username"
+			value="${gome.appraise.mongo.username}" />
+		<constructor-arg name="password"
+			value="${gome.appraise.mongo.password}" />
+	</bean>
+	<bean id="appraiseMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="appraiseMongoDB" />
+		<constructor-arg ref="appraiseMongoUser" />
+		<constructor-arg name="databaseName" value="${gome.appraise.mongo.db}" />
+	</bean>
+
+</beans>
