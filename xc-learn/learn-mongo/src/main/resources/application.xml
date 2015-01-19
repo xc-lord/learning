@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/context
           http://www.springframework.org/schema/context/spring-context-3.0.xsd
@@ -9,18 +10,34 @@
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
           http://www.springframework.org/schema/data/mongo
           http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+          http://code.alibabatech.com/schema/dubbo
+          http://code.alibabatech.com/schema/dubbo/dubbo.xsd
           http://www.springframework.org/schema/aop
           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 	<!-- 启用注解 -->
 	<context:component-scan base-package="com.lord" />
 
-	<bean id="propertyConfigurer"
+	<!-- 配置文件与项目分离：配置优先读取运行环境的配置文件，如果文件不存在，则读取类路径下的文件 -->
+	<bean id="propertyConfigurer1"
 		  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1"/>
+		<property name="ignoreResourceNotFound" value="true"/>
+		<property name="ignoreUnresolvablePlaceholders" value="true"/>
+		<property name="location" value="file:/weblogic/wls/user_projects/domains/atgdomain/gomeprod/global-config.properties"/>
+	</bean>
+	<bean id="propertyConfigurer2"
+		  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="2"/>
 		<property name="ignoreUnresolvablePlaceholders" value="true"/>
 		<property name="location" value="classpath:global-config.properties"/>
 	</bean>
 
+	<bean id="globalConfig" class="com.lord.tools.GlobalConfig">
+		<property name="env" value="${app.config.env}"/>
+	</bean>
+
+	<!-- mongodb的配置 -->
 	<mongo:mongo id="appraiseMongoDB" replica-set="${gome.appraise.mongo.urls}">
 		<mongo:options connections-per-host="${gome.appraise.mongo.conns}"
 			threads-allowed-to-block-for-connection-multiplier="5"
@@ -39,5 +56,25 @@
 		<constructor-arg ref="appraiseMongoUser" />
 		<constructor-arg name="databaseName" value="${gome.appraise.mongo.db}" />
 	</bean>
+
+	<bean id="simpleService" class="com.lord.service.impl.SimpleServiceImpl"></bean>
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="learn-mongo" />
+
+	<!-- 向多个注册中心暴露服务地址 -->
+	<dubbo:registry id="baseRegistry" protocol="${dubbo_protocol}" address="${base_dubbo_address}"/>
+	<dubbo:registry id="ioRegistry" protocol="${dubbo_protocol}" address="${io_dubbo_address}"/>
+
+	<!-- 用dubbo协议随机端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="-1" dispatcher="message" threads="200" />
+
+	<!-- 服务治理 监控中心协议，如果为protocol="registry"，表示从注册中心发现监控中心地址，否则直连监控中心 -->
+	<dubbo:monitor protocol="registry" />
+
+	<!-- 声明需要暴露的服务接口 -->
+	<dubbo:service registry="ioRegistry,baseRegistry" interface="com.lord.service.ISimpleService" ref="simpleService" />
+
+
 
 </beans>
