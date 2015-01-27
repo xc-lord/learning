@@ -2,3 +2,9 @@
 /xc-learn/learn-jdk/target
 /xc-learn/learn-mongo/*.iml
 /xc-learn/learn-jdk/*.iml
+/xc-learn/target
+/xc-learn/*.iml
+/xc-learn/learn-mybatis/*.iml
+/xc-learn/learn-mybatis/target
+/xc-learn/learn-ssh/*.iml
+/xc-learn/learn-ssh/target
