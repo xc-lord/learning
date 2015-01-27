@@ -1,0 +1,26 @@
+.footer {
+	background-color: #252525;
+	color: #BDBDBD;
+	border-top: 1px solid #E5E5E5;
+	margin-top: 70px;
+	padding: 30px 0;
+	text-align: center;
+}
+
+.thumbnail {
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	padding: 15px;
+	-moz-transition: all 0.2s ease-in-out 0s;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px 4px 4px 4px;
+	display: block;
+	line-height: 20px;
+}
+
+.thumbnail:hover {
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.xccontent {
+	margin-top: 80px;
+}

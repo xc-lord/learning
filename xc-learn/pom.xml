@@ -15,6 +15,8 @@
 	<modules>
 		<module>learn-jdk</module>
 		<module>learn-mongo</module>
+		<module>learn-mybatis</module>
+		<module>learn-ssh</module>
 	</modules>
 
 	<!-- 公共属性与第三方开源项目的版本号 -->
@@ -22,6 +24,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.11</junit.version>
 		<spring.version>3.2.3.RELEASE</spring.version>
+		<struts2.version>2.2.3.1</struts2.version>
 	</properties>
 
 	<!-- 管理依赖版本号，子项目不显式引用版本号，则引用此位置的版本号 -->
@@ -37,6 +40,11 @@
 			<!-- junit end -->
 
 			<!-- 日志slf4j start -->
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.16</version>
+			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
@@ -73,17 +81,38 @@
 				<version>1.9.2</version>
 			</dependency>
 
+			<!-- 缓存 -->
 			<dependency>
 				<groupId>net.sf.ehcache</groupId>
 				<artifactId>ehcache</artifactId>
 				<version>2.8.5</version>
 			</dependency>
 
+			<!-- 数据库：start -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>3.2.8</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.17</version>
+			</dependency>
 			<dependency>
 				<groupId>org.mongodb</groupId>
 				<artifactId>mongo-java-driver</artifactId>
 				<version>2.12.2</version>
 			</dependency>
+			<!-- 数据库：end -->
+
+			<!-- c3p0 start -->
+			<dependency>
+				<groupId>c3p0</groupId>
+				<artifactId>c3p0</artifactId>
+				<version>0.9.1.2</version>
+			</dependency>
+			<!-- c3p0 end -->
 
 			<!-- spring start -->
 			<dependency>
@@ -143,6 +172,75 @@
 			</dependency>
 			<!-- spring end -->
 
+			<!-- hibernate 4.0.0 start -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>4.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.0-api</artifactId>
+				<version>1.0.1.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-ehcache</artifactId>
+				<version>4.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.common</groupId>
+				<artifactId>hibernate-commons-annotations</artifactId>
+				<version>4.0.0.CR2</version>
+			</dependency>
+			<!-- hibernate 4.0.0 end -->
+
+			<!-- struts 2 start -->
+			<dependency>
+				<groupId>org.apache.struts</groupId>
+				<artifactId>struts2-core</artifactId>
+				<version>${struts2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.struts</groupId>
+				<artifactId>struts2-spring-plugin</artifactId>
+				<version>${struts2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.struts</groupId>
+				<artifactId>struts2-json-plugin</artifactId>
+				<version>${struts2.version}</version>
+			</dependency>
+			<!-- struts 2 end -->
+
+			<!-- servlet:start -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>jsp-api</artifactId>
+				<version>2.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- servlet:end -->
+
+			<!-- jstl start -->
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>taglibs</groupId>
+				<artifactId>standard</artifactId>
+				<version>1.1.2</version>
+			</dependency>
+			<!-- jstl end -->
+
 			<!-- alibaba -->
 			<dependency>
 				<groupId>com.alibaba.rocketmq</groupId>
@@ -168,16 +266,29 @@
 			</dependency>
 			<!-- dubbo end -->
 
+			<!-- Lucene start -->
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-core</artifactId>
+				<version>3.6.1</version>
+			</dependency>
+			<!-- Lucene end -->
+
+			<!-- dom4j start -->
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>1.6.1</version>
+			</dependency>
+			<dependency>
+				<groupId>jaxen</groupId>
+				<artifactId>jaxen</artifactId>
+				<version>1.1.4</version>
+			</dependency>
+			<!-- dom4j end -->
+
 		</dependencies>
 	</dependencyManagement>
-
-	<!-- 公共依赖 -->
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-	</dependencies>
 
 	<!-- 开发者信息 -->
 	<developers>

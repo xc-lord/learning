@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!-- 指定action类由spring创建 -->
+	<constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+    <!-- 开发模式 -->
+    <constant name="struts.devMode" value="true" />
+    <!-- 不使用Struts的过滤器的路径，用于结合web service -->
+    <constant name="struts.action.excludePattern" value="/services/.*"/>
+    <!-- 允许使用静态方法 -->
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+    
+    <package name="default" namespace="/" extends="struts-default">
+
+        <global-results>
+            <result name="error">/error.jsp</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+
+        <action name="index">
+            <result>
+            	/index.jsp
+            </result>
+        </action>
+    </package>
+    
+    <!-- 通配符方式配置,约定优于配置 -->
+    <package name="actions" namespace="/actions" extends="struts-default">
+    	<!-- <action name="user_*" class="userAction" method="{1}">
+    		<result name="success">/actions/User_{1}_success.jsp</result>
+    	</action> -->
+    	
+    	<action name="*_*" class="{1}Action" method="{2}">
+    		<result name="success">/actions/{1}_{2}_success.jsp</result>
+    	</action>
+    </package>
+    
+    <package name="account" namespace="/account" extends="struts-default">
+    	<action name="*_*" class="{1}Action" method="{2}">
+    		<result name="success">/account/{2}.jsp</result>
+    		<result name="submitSuccess" type="redirectAction">
+    			<param name="actionName">{1}_{2}</param>
+         		<param name="namespace">/account</param>
+         		<param name="succeed">${succeed}</param>
+    		</result>
+    	</action>
+    </package>
+    
+    <!-- 通配符方式配置,约定优于配置 -->
+    <package name="ajax" namespace="/ajax" extends="struts-default">
+    	<action name="*_*" class="{1}Action" method="{2}">
+    		<result name="success">/ajax/jsonData.jsp</result>
+    	</action>
+    </package>
+    
+    <!-- 返回结果为JSON 
+    <package name="ajax" namespace="/ajax" extends="json-default">
+    	<action name="*_*" class="{1}Action" method="{2}">
+    		<result type="json"></result>
+    	</action>
+    </package>
+    -->
+    
+    <!--     
+    <include file="example.xml"/>
+	-->
+    <!-- Add packages here -->
+    
+</struts>

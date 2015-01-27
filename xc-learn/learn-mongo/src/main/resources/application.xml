@@ -33,7 +33,7 @@
 		<property name="location" value="classpath:global-config.properties"/>
 	</bean>
 
-	<bean id="globalConfig" class="com.lord.tools.GlobalConfig">
+	<bean id="globalConfig" class="com.lord.learn.tools.GlobalConfig">
 		<property name="env" value="${app.config.env}"/>
 	</bean>
 
@@ -57,7 +57,7 @@
 		<constructor-arg name="databaseName" value="${gome.appraise.mongo.db}" />
 	</bean>
 
-	<bean id="simpleService" class="com.lord.service.impl.SimpleServiceImpl"></bean>
+	<bean id="simpleService" class="com.lord.learn.service.impl.SimpleServiceImpl"></bean>
 
 	<!-- 提供方应用信息，用于计算依赖关系 -->
 	<dubbo:application name="learn-mongo" />
@@ -73,7 +73,7 @@
 	<dubbo:monitor protocol="registry" />
 
 	<!-- 声明需要暴露的服务接口 -->
-	<dubbo:service registry="ioRegistry,baseRegistry" interface="com.lord.service.ISimpleService" ref="simpleService" />
+	<dubbo:service registry="ioRegistry,baseRegistry" interface="com.lord.learn.service.ISimpleService" ref="simpleService" />
 
 
 

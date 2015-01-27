@@ -21,8 +21,49 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- mysql driver start -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.17</version>
+        </dependency>
+        <!-- mysql driver end -->
+
+        <!-- Lucene start -->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wltea</groupId>
+            <artifactId>IKAnalyzer</artifactId>
+            <version>2012</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/IKAnalyzer2012.jar</systemPath>
+        </dependency>
+        <!-- Lucene end -->
+
+        <dependency>
+            <groupId>org.jave</groupId>
+            <artifactId>org.jave</artifactId>
+            <version>1.0.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/jave-1.0.2.jar</systemPath>
+        </dependency>
+
+        <!-- dom4j start -->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jaxen</groupId>
+            <artifactId>jaxen</artifactId>
+        </dependency>
+        <!-- dom4j end -->
+
     </dependencies>
 </project>
