@@ -64,7 +64,7 @@
                   <li><a href="${dynSite }/account/account_listAccount">记帐功能</a></li>
                 </ul>
               </li>
-              <li><a href="#about">关于我</a></li>
+              <li><a href="${dynSite }/myIndex.jsp">网站后台</a></li>
               <li><a href="#contact">联系我</a></li>
             </ul>
             <form class="navbar-form pull-right">
