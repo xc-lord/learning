@@ -11,10 +11,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MybatisSpringMain {
 
     public static void main(String[] args) {
+        System.out.println("测试Spring与Mybatis整合");
         ApplicationContext ctx=null;
         ctx=new ClassPathXmlApplicationContext("applicationContext.xml");
         UserMapper userMapper=(UserMapper)ctx.getBean("userMapper");
         User  u = userMapper.selectByPrimaryKey(1L);
-        System.out.println(u.getUsername());
+        System.out.println("用户名：" + u.getUsername());
     }
 }
