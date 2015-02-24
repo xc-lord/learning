@@ -8,3 +8,9 @@
 /xc-learn/learn-mybatis/target
 /xc-learn/learn-ssh/*.iml
 /xc-learn/learn-ssh/target
+/xc-learn/learn-springmvc/target
+/xc-learn/learn-springmvc/learn-springmvc.iml
+/xc-learn/comm-utils/target
+/xc-learn/comm-utils/*.iml
+/xc-learn/learn-springmvc/*.iml
+/xc-learn/.idea
