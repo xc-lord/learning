@@ -12,16 +12,28 @@
   <sql id="Base_Column_List" >
     id, level, password, userName, email, mobile
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=BIGINT}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from user
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
+  <!-- 批量删除 -->
+  <delete id="deleteBatch" parameterType="java.lang.Long" >
+    delete from user
+    where id in
+    <foreach item="idItem" collection="array" open="(" separator="," close=")">
+      #{idItem, jdbcType=BIGINT}
+    </foreach>
+  </delete>
+
   <insert id="insert" parameterType="com.lord.model.User" >
     insert into user (id, level, password, 
       userName, email, mobile
@@ -30,7 +42,23 @@
       #{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lord.model.User" >
+
+  <!-- 批量插入 -->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+    insert into user (level, password, userName, email, mobile)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.level,jdbcType=INTEGER}, #{item.password,jdbcType=VARCHAR},
+      #{item.username,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+  <insert id="insertSelective" keyProperty="id" parameterType="com.lord.model.User" >
+    <!-- 获得生成的主键ID -->
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS ID
+    </selectKey>
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

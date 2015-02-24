@@ -4,8 +4,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import com.lord.model.User;
-
 public class TestReflect {
 
 	/**
@@ -13,7 +11,7 @@ public class TestReflect {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		Class clazz = User.class;
+		Class clazz = ReflectBean.class;
 		Object obj = createInstance(clazz);
 		System.out.println(obj);
 		

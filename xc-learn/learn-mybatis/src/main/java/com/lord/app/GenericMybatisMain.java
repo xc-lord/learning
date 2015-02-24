@@ -11,7 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class GenericMybatisMain {
 
     public static void main(String[] args) {
-        System.out.println("测试Spring与Mybatis整合");
+        System.out.println("测试Spring与Mybatis整合：泛型DAO");
         ApplicationContext ctx = null;
         ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         IUserDao userDao = ctx.getBean(IUserDao.class);

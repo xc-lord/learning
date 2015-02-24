@@ -65,5 +65,10 @@
         </dependency>
         <!-- dom4j end -->
 
+        <dependency>
+            <groupId>org.apache.directory.studio</groupId>
+            <artifactId>org.apache.commons.io</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

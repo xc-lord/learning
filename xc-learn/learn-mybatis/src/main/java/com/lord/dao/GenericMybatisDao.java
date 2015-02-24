@@ -33,7 +33,7 @@ public interface GenericMybatisDao<T, PK extends Serializable> {
      * @param primaryKey 主键对象
      * @return 删除的对象个数，正常情况=1
      */
-    public int delete(PK primaryKey);
+    public int delete(PK... primaryKey);
 
     /**
      * 查询整表总记录数
@@ -76,5 +76,19 @@ public interface GenericMybatisDao<T, PK extends Serializable> {
      *
      * @param list
      */
-    public void batchDelete(final List<PK> list);
+    public int batchDelete(final List<PK> list);
+
+    /**
+     * 根据值相等查询
+     * @param entity
+     * @return  对象列表
+     */
+    public List<T> query(T entity);
+
+    /**
+     * 根据值相等查询
+     * @param entity
+     * @return  一个对象
+     */
+    public T queryOne(T entity);
 }

@@ -17,13 +17,15 @@
 		<module>learn-mongo</module>
 		<module>learn-mybatis</module>
 		<module>learn-ssh</module>
+		<module>learn-springmvc</module>
+		<module>comm-utils</module>
 	</modules>
 
 	<!-- 公共属性与第三方开源项目的版本号 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.11</junit.version>
-		<spring.version>3.2.3.RELEASE</spring.version>
+		<spring.version>4.0.5.RELEASE</spring.version>
 		<struts2.version>2.2.3.1</struts2.version>
 	</properties>
 
@@ -79,6 +81,12 @@
 				<groupId>commons-beanutils</groupId>
 				<artifactId>commons-beanutils</artifactId>
 				<version>1.9.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>1.2.4</version>
 			</dependency>
 
 			<!-- 缓存 -->
@@ -179,6 +187,24 @@
 				<version>2.2.0</version>
 			</dependency>
 			<!-- spring end -->
+
+			<!-- spring-webmvc start -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc-portlet</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>1.9.12</version>
+			</dependency>
+			<!-- spring-webmvc end -->
 
 			<!-- hibernate 4.0.0 start -->
 			<dependency>

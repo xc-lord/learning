@@ -28,7 +28,6 @@ import org.apache.lucene.util.Version;
 import org.junit.Test;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
-import com.lord.model.FileProperty;
 import com.lord.utils.NumberUtils;
 
 public class TestLucene {
